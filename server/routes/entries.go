@@ -129,7 +129,7 @@ func UpdateIngredient(c *gin.Context) {
 		return
 	}
 
-	result, updateErr := entryCollection.UpdateOne(ctx, bson.M{"_id": docId}, bson.D{{Key: "$set", Value: bson.D{{Key: "ingredients", Value: ingredient.Ingredients}}}})
+	result, updateErr := entryCollection.UpdateOne(ctx, bson.M{"_id": docId}, bson.D{{"$set", bson.D{{"ingredients", ingredient.Ingredients}}}})
 	if updateErr != nil {
 		c.JSON(http.StatusNotAcceptable, gin.H{"Insert error": updateErr})
 	}
